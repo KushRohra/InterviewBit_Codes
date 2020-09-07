@@ -1,0 +1,71 @@
+vector<int> Solution::plusOne(vector<int> &A)
+{
+    int a=0,i,f=0;
+    if(A.size()==1)
+    {
+        A[0]+=1;
+        if(A[0]==10)
+        {
+            A[0]=0;
+            A.insert(A.begin(),1);
+        }
+        return A;
+    }
+    reverse(A.begin(),A.end());
+    i=0;
+    while(i<A.size())
+    {
+        if(i==A.size()-1)
+        {
+            if(a==1)
+            {
+                A[i]=A[i]+1;
+                if(A[i]==10)
+                {
+                    A[i]=0;
+                    a=0;
+                    A.push_back(1);
+                }    
+            }
+        }
+        else
+        {
+            if(a==0)
+            {
+                if(A[i]==9)
+                {
+                    A[i]=0;
+                    a=1;
+                }
+                else
+                {
+                    A[i]=A[i]+1;
+                    a=0;
+                }      
+            }
+            else
+            {
+                A[i]=A[i]+1;
+                if(A[i]==10)
+                {
+                    A[i]=0;
+                    a=1;
+                }
+                else
+                {
+                    a=0;
+                }
+            }
+        }
+        i++;
+        if(a==0)
+            break;
+    }
+    reverse(A.begin(),A.end());
+    while(*A.begin()==0)
+    {
+        A.erase(A.begin());
+    }
+    return A;
+}
+
